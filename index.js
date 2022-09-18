@@ -3,7 +3,7 @@ import { renderFilmsHtml } from "./utils.js";
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 
-const baseUrl = "http://www.omdbapi.com/";
+const baseUrl = "https://www.omdbapi.com/";
 const apiKey = "e770338e";
 
 let filmNamesArray = [];
