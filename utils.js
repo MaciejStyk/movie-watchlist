@@ -24,7 +24,7 @@ export function renderFilmsHtml(filmsArray, addOrRemove) {
               <span>${film.Runtime}</span>
               <span>${film.Genre}</span>
               <button class="add-movies-button" data-id="${film.imdbID}">
-                <img src="./images/${addOrRemove}.svg"/>
+                <img src="./images/${addOrRemove.toLowerCase()}.svg"/>
                 ${addOrRemove}
               </button>
             </div>
