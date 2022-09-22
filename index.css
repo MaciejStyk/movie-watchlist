@@ -23,6 +23,7 @@ body {
 h1 {
   font-weight: 800;
   font-size: 2.5em;
+  text-align: center;
 }
 
 h4 {
@@ -51,9 +52,12 @@ body::-webkit-scrollbar {
 
 header {
   height: 25vh;
+  padding-bottom: 1em;
+  box-sizing: border-box;
   background: url(./images/cover.png) rgb(60, 60, 60);
   background-size: cover;
   background-blend-mode: multiply;
+  object-fit: cover;
   color: var(--white);
 }
 
@@ -62,6 +66,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 520px) {
+  .header__container {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 }
 
 header a {
@@ -84,17 +95,20 @@ header h4 a:hover {
   transform: translate(-50%, -50%);
   font-size: 0px;
   z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(max-content, 25%);
 }
 
 .searchbar > input {
-  width: 80%;
   font-size: 16px;
   box-sizing: border-box;
-  padding: 0.5em 1em 0.5em 2.8em;
+  padding: 0.5em 0.5em 0.5em 2.8em;
   border: 1px solid #d1d5db;
   border-radius: 6px 0px 0px 6px;
   position: relative;
   color: var(--dark-grey);
+  grid-column-start: 1;
+  overflow: auto;
 }
 
 .searchbar > img {
@@ -104,10 +118,10 @@ header h4 a:hover {
   left: 2%;
   color: var(--dark-grey);
   width: 16px;
+  grid-column-start: 1;
 }
 
 .searchbar > button {
-  width: 20%;
   font-size: 16px;
   font-weight: 600;
   color: var(--darker-grey);
@@ -138,6 +152,7 @@ header h4 a:hover {
   top: 30%;
   left: 50%;
   transform: translateX(-50%);
+  width: 80%;
   display: grid;
   place-items: center;
 }
@@ -148,50 +163,56 @@ header h4 a:hover {
   font-weight: 700;
   font-size: 1.125em;
   text-align: center;
-  line-height: 150%;
+  line-height: 1.5;
 }
 
-.single-film-container {
-  display: flex;
+.film-container {
   padding: 1em 0;
+  display: grid;
+  gap: 1em;
+  grid-template: max-content max-content 1fr / auto 1fr;
+  grid-template-areas:
+    "image title"
+    "image details"
+    "image description";
+  align-items: center;
 }
 
-.single-film-container:not(:last-child) {
+.film-container:not(:last-child) {
   border-bottom: 1.5px solid var(--light-grey);
 }
 
 .film-poster {
   height: 150px;
   width: 100px;
-  margin: auto 1.5em auto 0;
-}
-
-.film-title {
-  display: inline;
-  margin-right: 0.5em;
-  line-height: 140%;
+  grid-area: image;
+  align-self: center;
 }
 
 .film-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  grid-area: title;
 }
 
-.film-rating {
+.film-info__title {
+  display: inline;
+  margin-right: 0.5em;
+  line-height: 1.4;
+}
+
+.film-info__rating {
   font-size: 0.75em;
   display: inline-block;
   transform: translateY(-5%);
 }
 
-.film-info--details {
-  margin: 1em 0;
+.film-details {
   font-size: 0.75em;
-  line-height: 180%;
+  line-height: 1.8;
   color: var(--darker-grey);
+  grid-area: details;
 }
 
-.film-info--details > span {
+.film-details > span {
   margin-right: 1.5em;
 }
 
@@ -216,10 +237,12 @@ header h4 a:hover {
   transform: translateY(-5%);
 }
 
-.film-info > p {
+.film-description {
+  margin: 0;
   font-size: 0.875em;
-  line-height: 160%;
+  line-height: 1.6;
   color: var(--dark-grey);
+  grid-area: description;
 }
 
 .watchlist-button {
@@ -230,4 +253,19 @@ header h4 a:hover {
 
 .watchlist-button > img {
   transform: translateY(-10%);
+}
+
+@media (max-width: 520px) {
+  .film-container {
+    row-gap: 0.5em;
+    grid-template: max-content max-content 1fr / auto 1fr;
+    grid-template-areas:
+      "title title"
+      "details details"
+      "image description";
+  }
+
+  .film-details > span {
+    margin-right: 0.8em;
+  }
 }
